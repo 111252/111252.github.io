@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-05-25T15:28:41.293Z</updated>
+  <updated>2023-05-26T04:31:56.670Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,14 +21,14 @@
     <link href="http://example.com/undefined/255390e7.html"/>
     <id>http://example.com/undefined/255390e7.html</id>
     <published>2023-05-24T17:27:57.000Z</published>
-    <updated>2023-05-25T15:28:41.293Z</updated>
+    <updated>2023-05-26T04:31:56.670Z</updated>
     
-    <content type="html"><![CDATA[<p>我是技术随想</p>]]></content>
+    <content type="html"><![CDATA[<p>撒野</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;我是技术随想&lt;/p&gt;
+    <summary type="html">&lt;p&gt;撒野&lt;/p&gt;
 </summary>
       
     
@@ -42,15 +42,16 @@
     <link href="http://example.com/undefined/83dcefb7.html"/>
     <id>http://example.com/undefined/83dcefb7.html</id>
     <published>2023-05-24T17:27:57.000Z</published>
-    <updated>2023-05-25T15:37:03.818Z</updated>
+    <updated>2023-05-26T04:58:36.175Z</updated>
     
-    <content type="html"><![CDATA[<p>我是01</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="一、排序操作"><a href="#一、排序操作" class="headerlink" title="一、排序操作"></a>一、排序操作</h2><p>1.查看接口文档里的参数</p><p>2再在data中设置默认值</p><p>3.排序的解构，放入计算属性中</p><p>表达的是 这个数值里面有没有包含1这个属性值  ，包含一 </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">isOne() &#123;</span><br><span class="line">      return this.searchParams.order.indexOf(&quot;1&quot;) != -1;</span><br></pre></td></tr></table></figure><p>：class  绑定class样式，这样的类名不确定，需要动态指定</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li :class=&quot;&#123; active: isOne &#125;&quot; @click=&quot;changeOrder(1)&quot;&gt;</span><br></pre></td></tr></table></figure><p>4.span内联元素</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;a&gt;价格</span><br><span class="line">  &lt;span v-show=&quot;isTwo&quot; class=&quot;iconfont&quot; </span><br><span class="line">  :class=&quot;&#123; &#x27;icon-UP&#x27;: isAcs, &#x27;icon-DOWN&#x27;: isDesc &#125;&quot;&gt;&lt;/span&gt;   &lt;/a&gt;</span><br></pre></td></tr></table></figure><p>5.排序的逻辑 </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">changeOrder(flag) &#123;</span><br><span class="line">     // console.log(flag)</span><br><span class="line">     // let originOrder = this.searchParams.order;</span><br><span class="line">     let originFlag = this.searchParams.order.split(&quot;:&quot;)[0];</span><br><span class="line">     let originSort = this.searchParams.order.split(&quot;:&quot;)[1];</span><br><span class="line">     let newOrder = &quot;&quot;;</span><br><span class="line">     if (flag == originFlag) &#123;</span><br><span class="line">       newOrder = `$&#123;originFlag&#125;:$&#123;originSort == &quot;desc&quot; ? &quot;asc&quot; : &quot;desc&quot;&#125;`;</span><br><span class="line">     &#125; else &#123;</span><br><span class="line">       newOrder = `$&#123;flag&#125;:$&#123;&quot;desc&quot;&#125;`;</span><br><span class="line">     &#125;</span><br><span class="line">     this.searchParams.order = newOrder;</span><br><span class="line">     this.getData();</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure><h3 id="二、分页器"><a href="#二、分页器" class="headerlink" title="二、分页器"></a>二、分页器</h3><p><img src="C:\Users\林兮有夢\AppData\Roaming\Typora\typora-user-images\1684978286418.png"></p><h6 id="注意的点"><a href="#注意的点" class="headerlink" title="注意的点"></a>注意的点</h6><ol><li>设置4个数据 （当前页、每一页展示多少的数据、一共有多少条数据、连续页码数）</li><li>上一页和下一页的隐藏情况</li><li>…的隐藏</li><li>第一页和最后一页的隐藏</li></ol><p>​——</p><h6 id="Math-ceil-向上取整"><a href="#Math-ceil-向上取整" class="headerlink" title="Math.ceil :向上取整"></a>Math.ceil :向上取整</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.ceil(this.total / this.pageSize);</span><br></pre></td></tr></table></figure><p>Math.floor(Math.random()*3)  向下取整</p><p>​——</p><h6 id="v-for遍历数字"><a href="#v-for遍历数字" class="headerlink" title="v-for遍历数字"></a>v-for遍历数字</h6><p><img src="C:\Users\林兮有夢\AppData\Roaming\Typora\typora-user-images\1684978793304.png" alt="1684978793304"></p><p>​——</p><h6 id="在函数中使用一个量时"><a href="#在函数中使用一个量时" class="headerlink" title="在函数中使用一个量时"></a>在函数中使用一个量时</h6><p>使用props传入的变量，注意先定义变量</p><p>​——</p><h6 id="使用仓库数据时"><a href="#使用仓库数据时" class="headerlink" title="使用仓库数据时"></a>使用仓库数据时</h6><h2 id="有2个仓库要分开引用，否则拿不到数据"><a href="#有2个仓库要分开引用，否则拿不到数据" class="headerlink" title="有2个仓库要分开引用，否则拿不到数据"></a>有2个仓库要分开引用，否则拿不到数据</h2>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;我是01&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;h2 id=&quot;一、排序操作&quot;&gt;&lt;a href=&quot;#一、排序操作&quot; class=&quot;headerlink&quot; title=&quot;一、排序操作&quot;&gt;&lt;/a&gt;一、排序操作&lt;/h2&gt;&lt;p&gt;1.查看接口文档里的参数&lt;/p&gt;
+&lt;p&gt;2再在data中设置默认值&lt;/p&gt;
+&lt;p&gt;3.排序的解构，放入计算属</summary>
       
     
     
